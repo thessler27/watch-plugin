@@ -38,14 +38,14 @@
     <platform name="ios">
 
         <config-file target="config.xml" parent="/*">
-            <feature name="BackgroundAudio">
-                <param name="ios-package" value="BackgroundAudio" />
+            <feature name="AppleWatch">
+                <param name="ios-package" value="AppleWatch" />
                 <param name="onload" value="true" />
             </feature>
         </config-file>
 
-        <header-file src="src/ios/BackgroundAudio.h" />
-        <source-file src="src/ios/BackgroundAudio.m" />
+        <header-file src="src/ios/AppleWatch.h" />
+        <source-file src="src/ios/AppleWatch.m" />
 
     </platform>
 
