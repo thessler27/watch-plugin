@@ -1,6 +1,6 @@
 ---
-title: Background Audio
-description: Connect to Apple Watch via Watch Connectivity framework and send/receive messages.
+Title: Apple Watch Plugin
+Description: Connect to Apple Watch via Watch Connectivity framework and send/receive messages.
 ---
 
 ## Installation
