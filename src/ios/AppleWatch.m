@@ -10,7 +10,7 @@
 
 - (void) initializeSession: (CDVInvokedUrlCommand *) command {
     [self.commandDelegate runInBackground:^{
-        CDVPluginResult* pluginResult = nil;
+        __block CDVPluginResult* pluginResult = nil;
         if ([WCSession isSupported]) {
             WCSession* session = [WCSession defaultSession];
             session.delegate = self;
@@ -27,7 +27,7 @@
 
       NSString *teststring = [NSString stringWithFormat:@"%s", "Hello World"];
       NSDictionary *applicationData = [[NSDictionary alloc] initWithObjects:@[teststring] forKeys:@[@"testdata"]];
-      CDVPluginResult* pluginResult = nil;
+      __block CDVPluginResult* pluginResult = nil;
     
       [[WCSession defaultSession] sendMessage:applicationData
                                   replyHandler:^(NSDictionary<NSString *,id> * _Nonnull replyMessage) {
