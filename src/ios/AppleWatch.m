@@ -25,6 +25,23 @@
     }];
 }
 
+- (void)session:(nonnull WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(nullable NSError *)error {
+  
+  NSLog(@"Session activation completed with state");
+  
+}
+
+- (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler {
+  
+  // In this case, the message content being sent from the app is a simple begin message. This tells the app to wake up and begin sending location information to the watch.
+  NSLog(@"Reached IOS APP");
+}
+-(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message{
+  NSLog(@"Reached IOS APP");
+}
+
+
+
 - (void) sendMessage: (CDVInvokedUrlCommand *) command {
     [self.commandDelegate runInBackground:^{
 
