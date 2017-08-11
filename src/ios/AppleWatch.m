@@ -25,10 +25,10 @@
 - (void) sendMessage: (CDVInvokedUrlCommand *) command {
     [self.commandDelegate runInBackground:^{
 
-       NSString *teststring = [NSString stringWithFormat:@"%s", "Hello World"];
-       NSDictionary *applicationData = [[NSDictionary alloc] initWithObjects:@[teststring] forKeys:@[@"testdata"]];
-       CDVPluginResult* pluginResult = nil;
-      
+      NSString *teststring = [NSString stringWithFormat:@"%s", "Hello World"];
+      NSDictionary *applicationData = [[NSDictionary alloc] initWithObjects:@[teststring] forKeys:@[@"testdata"]];
+      CDVPluginResult* pluginResult = nil;
+    
       [[WCSession defaultSession] sendMessage:applicationData
                                   replyHandler:^(NSDictionary<NSString *,id> * _Nonnull replyMessage) {
                                       //handle success
