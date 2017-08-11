@@ -12,13 +12,16 @@
     [self.commandDelegate runInBackground:^{
         __block CDVPluginResult* pluginResult = nil;
         if ([WCSession isSupported]) {
-            WCSession* session = [WCSession defaultSession];
-            session.delegate = self;
-            [session activateSession];
-            pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsBool: true];
-        }
-        pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR messageAsBool: false];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
+          NSLog(@"WC Session is supported! Sweet.");
+          WCSession* session = [WCSession defaultSession];
+          session.delegate = self;
+          [session activateSession];
+          pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsBool: true];
+          [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
+        } else {
+          pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR messageAsBool: false];
+          [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
+        } 
     }];
 }
 
