@@ -34,7 +34,10 @@ var AppleWatch = {
     },
     sendMessage: function(data) {
     	return new Promise(function(resolve, reject) {
-    		exec(resolve, reject, "AppleWatch", "watchConnection", [data]);
+    		if(!data) {
+    			return reject("No data send through!");
+    		}
+    		exec(resolve, reject, "AppleWatch", "sendMessage", [data]);
     	});
     }
 

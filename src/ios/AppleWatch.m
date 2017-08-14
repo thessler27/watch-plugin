@@ -61,12 +61,15 @@
 
 - (void) sendMessage: (CDVInvokedUrlCommand *) command {
     [self.commandDelegate runInBackground:^{
-
-      NSString *teststring = [NSString stringWithFormat:@"%s", "Hello World"];
-      NSDictionary *applicationData = [[NSDictionary alloc] initWithObjects:@[teststring] forKeys:@[@"testdata"]];
       __block CDVPluginResult* pluginResult = nil;
-    
-      [[WCSession defaultSession] sendMessage:applicationData
+      NSDictionary *applicationData = [command.arguments objectAtIndex:0];
+      if(!applicationData) {
+        NSString *error = @"No data send through!";
+        NSLog(error);
+        pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR messageAsString: error];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
+      } else {
+        [[WCSession defaultSession] sendMessage:applicationData
                                   replyHandler:^(NSDictionary<NSString *,id> * _Nonnull replyMessage) {
                                       //handle success
                                       NSLog(@"Successful connection to default session! %@", replyMessage);
@@ -78,6 +81,10 @@
                                       pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR messageAsBool: false];
                                       [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
                                   }];
+      }
+      
+    
+      
     }];
 }
 
