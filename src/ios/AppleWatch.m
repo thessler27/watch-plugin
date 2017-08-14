@@ -2,6 +2,12 @@
 #import "WatchConnectivity/WatchConnectivity.h"
 #import "CoreFoundation/CoreFoundation.h"
 
+@interface AppleWatch ()
+
+@property NSDictionary *resultDict;
+
+@end
+
 @implementation AppleWatch
 
 // this method is executed when the app loads because of the onload param in plugin.xml
@@ -26,7 +32,7 @@
     }];
 }
 
-- (void) watchConnection:(NSDictionary *) dict {
+- (void) watchConnection:(CDVInvokedUrlCommand *) command {
   NSLog(@"Watching connection beginz");
   __block CDVPluginResult* pluginResult = nil;
   if(!dict) {
@@ -46,7 +52,8 @@
 
 - (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler {
   // In this case, the message content being sent from the app is a simple begin message. This tells the app to wake up and begin sending location information to the watch.
-  [self watchConnection: message];
+  self.resultDict = message;
+  [self watchConnection];
   NSLog(@"Reached IOS APP %@", message);
 }
 
