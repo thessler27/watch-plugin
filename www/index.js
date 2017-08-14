@@ -27,6 +27,11 @@ var
 
 var AppleWatch = {
 
+    initializeSession: function () {
+    	return new Promise(function(resolve, reject) {
+    		exec(resolve, reject, "AppleWatch", "initializeSession", []);
+    	});
+    },
     sendMessage: function(data) {
     	return new Promise(function(resolve, reject) {
     		exec(resolve, reject, "AppleWatch", "watchConnection", [data]);

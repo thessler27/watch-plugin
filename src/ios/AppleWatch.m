@@ -15,6 +15,23 @@
     NSLog(@"Initializing Apple Watch plugin!");
 }
 
+- (void) initializeSession: (CDVInvokedUrlCommand *) command {
+    [self.commandDelegate runInBackground:^{
+        __block CDVPluginResult* pluginResult = nil;
+        if ([WCSession isSupported]) {
+          NSLog(@"WC Session is supported! Sweet.");
+          WCSession* session = [WCSession defaultSession];
+          session.delegate = self;
+          [session activateSession];
+          pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsBool: true];
+          [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
+        } else {
+          pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR messageAsBool: false];
+          [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
+        } 
+    }];
+}
+
 - (void)session:(nonnull WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(nullable NSError *)error {
   
   NSLog(@"Session activation completed with state");
@@ -29,11 +46,10 @@
                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
                                                         error:&error];
   NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-  NSString *toSend     = [NSString stringWithFormat:@"setTimeout(function(){ console.log('cordova avail?', !!cordova); if(!!cordova) { cordova.fireDocumentEvent('cordovaAppleWatch:didReceiveMessage', {data: %@} ) } })", jsonString];
-  NSLog(@"JS Method to run %@", toSend);
-  [self.commandDelegate evalJs:toSend];
+  NSLog(@"JS Method to run %@", [NSString stringWithFormat:@"setTimeout(function(){ console.log('cordova avail?', !!cordova); if(!!cordova) { cordova.fireDocumentEvent('cordovaAppleWatch:didReceiveMessage', {data: '%@'} ) } })", jsonString]);
+  [self.commandDelegate evalJs:@"setTimeout(function(){ console.log('cordova avail?', !!cordova); if(!!cordova) { cordova.fireDocumentEvent('cordovaAppleWatch:didReceiveMessage', {data: 'Hello World'} ) } })"];
+  
 }
-
 
 - (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message{
   NSLog(@"Reached IOS APP");
