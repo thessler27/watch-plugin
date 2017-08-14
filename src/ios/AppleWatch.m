@@ -33,15 +33,16 @@
 }
 
 - (void) watchConnection:(CDVInvokedUrlCommand *) command {
-  NSLog(@"Watching connection beginz");
-  __block CDVPluginResult* pluginResult = nil;
-  if(!dict) {
-    pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR messageAsString: @"Some issue no dict"];
-  } else {
-    pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsDictionary: dict];
-  }
-  [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
-
+  [self.commandDelegate runInBackground:^{
+    NSLog(@"Watching connection beginz");
+    __block CDVPluginResult* pluginResult = nil;
+    if(!self.resultDict) {
+      pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR messageAsString: @"Some issue no dict"];
+    } else {
+      pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsDictionary: self.resultDict];
+    }
+    [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
+  }];
 }
 
 - (void)session:(nonnull WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(nullable NSError *)error {
