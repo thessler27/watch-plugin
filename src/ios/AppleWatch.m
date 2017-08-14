@@ -41,8 +41,9 @@
 - (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler {
   // In this case, the message content being sent from the app is a simple begin message. This tells the app to wake up and begin sending location information to the watch.
   NSString* jsMethod = [NSString stringWithFormat:@"setTimeout(function(){ console.log('cordova avail?', !!cordova); if(!!cordova) { cordova.fireDocumentEvent('cordovaAppleWatch:didReceiveMessage', {data: '%@'} ) } })", message];
+  NSLog(@"Reached IOS APP %@", message, jsMethod);
   [self.commandDelegate evalJs:jsMethod];
-  NSLog(@"Reached IOS APP %@", message);
+  
 }
 
 - (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message{
