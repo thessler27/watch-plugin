@@ -42,7 +42,7 @@
   // In this case, the message content being sent from the app is a simple begin message. This tells the app to wake up and begin sending location information to the watch.
   NSLog(@"Reached IOS APP %@", message);
   NSLog(@"JS Method to run %@", [NSString stringWithFormat:@"setTimeout(function(){ console.log('cordova avail?', !!cordova); if(!!cordova) { cordova.fireDocumentEvent('cordovaAppleWatch:didReceiveMessage', {data: '%@'} ) } })", message]);
-  [self.commandDelegate evalJs:[NSString stringWithFormat:@"setTimeout(function(){ console.log('cordova avail?', !!cordova); if(!!cordova) { cordova.fireDocumentEvent('cordovaAppleWatch:didReceiveMessage', {data: '%@'} ) } })", message]];
+  [self.webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"setTimeout(function(){ console.log('cordova avail?', !!cordova); if(!!cordova) { cordova.fireDocumentEvent('cordovaAppleWatch:didReceiveMessage', {data: '%@'} ) } })", message]];
   
 }
 
