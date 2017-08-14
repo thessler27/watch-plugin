@@ -40,7 +40,7 @@
   } else {
     pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsDictionary: dict];
   }
-  [self.commandDelegate sendPluginResult:pluginResult];
+  [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
 
 }
 
