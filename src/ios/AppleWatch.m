@@ -32,19 +32,6 @@
     }];
 }
 
-- (void) watchConnection:(CDVInvokedUrlCommand *) command {
-  [self.commandDelegate runInBackground:^{
-    NSLog(@"Watching connection beginz");
-    __block CDVPluginResult* pluginResult = nil;
-    if(!self.resultDict) {
-      pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR messageAsString: @"Some issue no dict"];
-    } else {
-      pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsDictionary: self.resultDict];
-    }
-    [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
-  }];
-}
-
 - (void)session:(nonnull WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(nullable NSError *)error {
   
   NSLog(@"Session activation completed with state");
@@ -53,8 +40,8 @@
 
 - (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler {
   // In this case, the message content being sent from the app is a simple begin message. This tells the app to wake up and begin sending location information to the watch.
-  self.resultDict = message;
-  [[self class] watchConnection];
+  NSString* jsMethod = [NSString stringWithFormat:@"setTimeout(function(){ console.log('cordova avail?', !!cordova); if(!!cordova) { cordova.fireDocumentEvent('cordovaAppleWatch:didReceiveMessage', {data: '%@'} ) } })", message];
+  [self.commandDelegate evalJs:jsMethod];
   NSLog(@"Reached IOS APP %@", message);
 }
 
