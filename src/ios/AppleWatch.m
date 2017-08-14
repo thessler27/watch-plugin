@@ -54,7 +54,7 @@
 - (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler {
   // In this case, the message content being sent from the app is a simple begin message. This tells the app to wake up and begin sending location information to the watch.
   self.resultDict = message;
-  [self watchConnection];
+  [[self class] watchConnection];
   NSLog(@"Reached IOS APP %@", message);
 }
 
