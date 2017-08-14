@@ -32,13 +32,18 @@
   NSString *toSend     = [NSString stringWithFormat:@"setTimeout(function(){ console.log('cordova avail?', !!cordova); if(!!cordova) { cordova.fireDocumentEvent('cordovaAppleWatch:didReceiveMessage', {data: %@} ) } })", jsonString];
   NSLog(@"JS Method to run %@", toSend);
   [self.commandDelegate evalJs:toSend];
-  
+}
+
+
+- (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message{
+  NSLog(@"Reached IOS APP");
 }
 
 
 
 - (void) sendMessage: (CDVInvokedUrlCommand *) command {
     [self.commandDelegate runInBackground:^{
+
       NSString *teststring = [NSString stringWithFormat:@"%s", "Hello World"];
       NSDictionary *applicationData = [[NSDictionary alloc] initWithObjects:@[teststring] forKeys:@[@"testdata"]];
       __block CDVPluginResult* pluginResult = nil;
