@@ -22,14 +22,19 @@
 /* global cordova */
 
 var 
-	exec 		= require('cordova/exec'),
-	channel = require('cordova/channel');
+	exec 			 = require('cordova/exec'),
+	channel 	 = require('cordova/channel');
 
 var AppleWatch = {
 
     initializeSession: function () {
     	return new Promise(function(resolve, reject) {
     		exec(resolve, reject, "AppleWatch", "initializeSession", []);
+    	});
+    },
+    watchConnection: function() {
+    	return new Promise(function(resolve, reject) {
+    		exec(resolve, reject, "AppleWatch", "watchConnection", []);
     	});
     }
 
