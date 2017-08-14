@@ -32,9 +32,9 @@ var AppleWatch = {
     		exec(resolve, reject, "AppleWatch", "initializeSession", []);
     	});
     },
-    watchConnection: function() {
+    sendMessage: function(data) {
     	return new Promise(function(resolve, reject) {
-    		exec(resolve, reject, "AppleWatch", "watchConnection", []);
+    		exec(resolve, reject, "AppleWatch", "watchConnection", [data]);
     	});
     }
 
