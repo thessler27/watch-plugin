@@ -22,8 +22,7 @@
 /* global cordova */
 
 var 
-	exec 			 = require('cordova/exec'),
-	channel 	 = require('cordova/channel');
+	exec 			 = require('cordova/exec');
 
 var AppleWatch = {
 

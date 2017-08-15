@@ -67,12 +67,12 @@
                                   replyHandler:^(NSDictionary<NSString *,id> * _Nonnull replyMessage) {
                                       //handle success
                                       NSLog(@"Successful connection to default session! %@", replyMessage);
-                                      pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsBool: true];
+                                      pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK];
                                       [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
                                   } errorHandler:^(NSError * _Nonnull error) {
                                       //handle error
                                       NSLog(@"Houston, we have a problem. %@", error);
-                                      pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR messageAsBool: false];
+                                      pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR];
                                       [self.commandDelegate sendPluginResult:pluginResult callbackId: command.callbackId];
                                   }];
       }
