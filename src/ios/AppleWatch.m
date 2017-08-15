@@ -2,12 +2,6 @@
 #import "WatchConnectivity/WatchConnectivity.h"
 #import "CoreFoundation/CoreFoundation.h"
 
-@interface AppleWatch ()
-
-@property NSDictionary *resultDict;
-
-@end
-
 @implementation AppleWatch
 
 // this method is executed when the app loads because of the onload param in plugin.xml
