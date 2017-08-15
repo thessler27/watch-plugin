@@ -13,19 +13,19 @@ Utilization
 
 _You must initialize the session for the Apple Watch listener to be activated._
 
-###### Initialize 
+##### Initialize 
 
 `AppleWatch.initializeSession():Promise<boolean>`
 
 > Returns successful promise result with `true` boolean if successful connection, and throws an error with boolean `false` if unsuccessful.
 
-###### Watch for incoming messages
+##### Watch for incoming messages
 
 `document.addEventListener('cordovaAppleWatch:didReceiveMessage', handleWatchEventWithData)`
 
 > When the watch sends a message to the iOS device, it sends the data through this event.
 
-###### Send a message to the watch listener
+##### Send a message to the watch listener
 
 `AppleWatch.sendMessage(data):Promise<void>`
 
