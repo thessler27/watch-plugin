@@ -13,7 +13,7 @@ cordova plugin add https://github.com/thessler27/watch-plugin.git
 Utilization
 -------------------
 
-_You must initialize the session for the Apple Watch listener to be activated._
+_You must initialize the session for the Apple Watch listener to be activated and to send messages._
 
 ### Initialize 
 
