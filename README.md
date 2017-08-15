@@ -6,7 +6,9 @@ Description: Connect to Apple Watch via Watch Connectivity framework and send/re
 Installation
 -------------------
 
-1. `cordova plugin add https://github.com/thessler27/watch-plugin.git`
+```javascript
+cordova plugin add https://github.com/thessler27/watch-plugin.git
+```
 
 Utilization
 -------------------
